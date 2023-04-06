@@ -1,4 +1,3 @@
 # yoshimoe
-# yoshimoe
-# yoshimoe
-# yoshimoe
+
+Visit the website here [yoshi.moe](https://yoshi.moe).
