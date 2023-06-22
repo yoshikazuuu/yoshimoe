@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.get("/random-image", (req, res) => {
   fs.readdir("public/img", (err, files) => {
