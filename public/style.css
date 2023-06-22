@@ -1,0 +1,121 @@
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 50%;
+  padding-top: 5%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 10vh;
+  text-shadow: 1px 1px 1px black;
+}
+
+.quote {
+  font-family: Georgia;
+  font-style: italic;
+  font-size: 4em;
+  text-shadow: none;
+  color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  z-index: -1;
+  right: 5%;
+  top: 10%;
+  width: 40%;
+  text-align: right;
+  align-items: center;
+  pointer-events: none;
+}
+
+.hint {
+  font-size: 0.7em;
+  font-family: Quicksand;
+  font-style: italic;
+  color: white;
+  margin-bottom: 4em;
+}
+
+.title {
+  font-family: Oswald;
+  font-size: 64px;
+  margin: 0;
+}
+
+a {
+  color: var(--compl-color);
+  text-shadow: 1px 1px 1px black;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  font-size: smaller;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.yellow {
+  color: var(--compl-color);
+}
+
+.container {
+  padding-left: 10%;
+  display: flex;
+  width: 644px;
+  height: 486px;
+  flex-direction: column;
+  flex-shrink: 0;
+  color: white;
+  font-size: 23px;
+  font-family: Quicksand;
+  font-weight: 100;
+}
+
+.mizuki {
+  color: white;
+  font-size: 30px;
+  font-family: Rakkas;
+}
+
+.gradient {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--dynamic-color), #d9d9d900 100%);
+  z-index: -1;
+}
+
+footer {
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka,
+    "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    width: auto;
+    padding: 5%;
+  }
+
+  .title {
+    font-size: 3em;
+  }
+
+  .container {
+    width: 80%;
+    font-size: 1.2em;
+    min-height: 20vh;
+  }
+
+  .mizuki {
+    font-size: 1em;
+  }
+}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>yoshi.moe</title>
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Rakkas' rel='stylesheet'>
+    <link rel="icon" type="image/x-icon"
+        href="https://media.discordapp.net/attachments/714847546903625790/1121287062084141208/normal_1.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link href="/style.css" rel="stylesheet" type="text/css">
+    <style id="random-bg"></style>
+</head>
+
+<body>
+    <img id="background-img" src="" style="display:none">
+    <div class="gradient"></div>
+    <div class="quote" id="quote"></div>
+
+    <div class="container">
+        <p class="title">Welcome to <a class="yellow" style="text-decoration: none;" href=".">yoshi.moe</a>!</p>
+        <p class="hint">(click the <a class="yellow" style="text-decoration: none;" href=".">yoshi.moe</a> to get a
+            surprise!)</p>
+
+        An unstoppable fan of<br><br>
+
+        <span class="mizuki">✨ Akiyama Mizuki a.k.a. Amia! ✨</span> <br>
+
+        I live and breathe everything Mizuki. Also, curry rice and french fries fanatic. #TeamMizuki forever!<br>
+
+        <p>My beloved bot,
+            <a href="https://mizuki.yoshi.moe">Mizuki</a>, and her <a
+                href="https://github.com/yoshikazuuu/manga-downloader">manga-downloader</a>.
+            <br />
+            My other side project <a href="https://modal.yoshi.moe">PasarModal</a>.
+            <br />
+            My other <a href="https://aihi.me">website</a> built using <a href="https://nextjs.org/">Next.js</a>
+            <br />
+            My <a href="https://github.com/yoshikazuuu">GitHub</a>.
+        </p>
+
+        Thank you for visiting!<br>
+    </div>
+
+    <footer>
+        &copy; よしもえ
+    </footer>
+
+    <script src="https://unpkg.com/fast-average-color/dist/index.browser.min.js"></script>
+    <script>
+        const fac = new FastAverageColor();
+        const container = document.querySelector('.container');
+
+        function createComplimentaryPastel(rgb) {
+            // Finding the complimentary color
+            let compColor = rgb.map(val => 255 - val);
+
+            // Creating the pastel version
+            let pastelColor = compColor.map(val => Math.round(val + 0.5 * (255 - val)));
+
+            // Ensuring the values do not exceed 255
+            pastelColor = pastelColor.map(val => val > 255 ? 255 : val);
+
+            return pastelColor;
+        }
+
+        function getComplementaryColor(r, g, b, a) {
+            // Subtract each color component from 255
+            var compR = 255 - r;
+            var compG = 255 - g;
+            var compB = 255 - b;
+
+            // Return the complementary color in rgba format
+            return `rgba(${compR}, ${compG}, ${compB}, ${a})`;
+        }
+
+        fetch('/random-image')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('random-bg').textContent =
+                    `body {background: url("${data.imagePath}") no-repeat center center fixed; 
+                    -webkit-background-size: cover;
+                    -moz-background-size: cover;
+                    -o-background-size: cover;
+                    background-size: cover;}`;
+
+
+                fac.getColorAsync(data.imagePath)
+                    .then(color => {
+                        document.documentElement.style.setProperty('--dynamic-color', color.rgb);
+                        document.documentElement.style.setProperty('--compl-color', `rgba(${color.value[0]}, ${color.value[1]}, ${color.value[2]}, ${color.value[3] - 220})`);
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
+            })
+            .catch(console.error);
+
+        let quotes =
+            [
+                "Time to get motivated.",
+                "Alright, I'll do my best as well.",
+                "Now where can I get some cute clothes and accessories?",
+                "Hmm... Trees shedding their leaves would make for a cool background video.",
+                "The new fall-winter range at the store I work at is totes adorable!",
+                "Fall is the season of... cuteness! But then again, which season isn't!",
+                "It's too cold to get out of my cozy, warm bed.",
+                "Eating ice cream in my toasty room is a special winter pleasure.",
+                "It'd be nice to warm up with some hot soup, but I'd just burn my tongue.",
+                "Pink is the color of spring, and pink's cute, so that makes spring cute too?",
+                "Photographing flowers? Ena just wants flowers in her selfies' backgrounds.",
+                "Got to dress cute for spring! Lots of styles work well in this season!",
+                "I really like how warm and cozy winter clothing is, but pastel colors you see used in spring's just too cute to pass up, you know?",
+                "As much as I want to watch all the new anime airing this spring, I still have work to do. I guess I'll just record everything and watch them later.",
+                "Yellow flowers suit you so well, Rin! Oh, you don't care...? There you go again, playing hard to get...",
+                "In this kind of weather, I can already picture Ena pestering her brother to buy her ice cream or something.",
+                "Yikes, what a downpour. I hope it doesn't rain when I go shopping for fabrics.",
+                "The sun's really beating down today. If I go out, I might melt...",
+                "All right, the costumes are ready! Ena will surely wear hers, but the others?",
+                "Everything's all Halloween-colored♪ It think I'll take some decorations over to SEKAI to spice things up!",
+                "We'll have our Christmas party online, eating cake in front of the screen♪",
+                "Looking back, this was an eventful year. It was as good as it gets.♪",
+                "Hey, want to try on a traditional kimono, seeing as it's New Year and all that?",
+                "Huh, Mafuyu’s the ogre? I wanted it to be Ena so I could throw beans at her.",
+                "Teehee! Now just to decorate the chocolates before they set!",
+                "Doll Festival already has such a cute ring to it. Those rice puffs and special mochi are really cute and colorful too!",
+                "I wonder if I'll get anything in return? It looked like Kanade was getting something ready, so just maybe...!",
+                "I wonder what that British station is gonna do this year? I'm always secretly excited for it♪",
+                "My wish... Hmm... I guess I just want to keep having fun right now...",
+                "Everything seems better when you're around, MEIKO. Haha. Anyway, congratulations.",
+                "Happy birthday, Mafuyu! Are you named for winter because you were born in winter?",
+                "Happy birthday, Kanade! We're treating you to a meal at the diner!",
+                "Happy birthday, Ena! Wanna hit up a cafe? It's your special day, so it'll be on me!",
+                "I heard it's your birthday, Tsukasa! I just happen to have some snacks on me, so here, you can have some♪",
+                "It's your birthday, Toya? Happy birthday♪ Let's get Li'l Bro and hang out together sometime!",
+                "To think that I'd be celebrating your birthday like this. Happy birthday, Rui!",
+                "Happy birthday, An♪ I really appreciate how much you've been looking out for me, so thanks.",
+                "All these people congratulating me for my birthday. When did my contact list get this long?",
+            ];
+
+        let randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
+        document.getElementById('quote').textContent = `"${randomQuote}"`;
+    </script>
+
+</body>
+
+</html>
