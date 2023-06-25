@@ -15,7 +15,6 @@
 </head>
 
 <body>
-    <img id="background-img" src="" style="display:none">
     <div class="gradient"></div>
 
     <div class="container">
@@ -54,41 +53,39 @@
         const fac = new FastAverageColor();
         const container = document.querySelector('.container');
 
-        function createComplimentaryPastel(rgb) {
-            // Finding the complimentary color
-            let compColor = rgb.map(val => 255 - val);
-
-            // Creating the pastel version
-            let pastelColor = compColor.map(val => Math.round(val + 0.5 * (255 - val)));
-
-            // Ensuring the values do not exceed 255
-            pastelColor = pastelColor.map(val => val > 255 ? 255 : val);
-
-            return pastelColor;
-        }
-
-        function getComplementaryColor(r, g, b, a) {
-            // Subtract each color component from 255
-            var compR = 255 - r;
-            var compG = 255 - g;
-            var compB = 255 - b;
-
-            // Return the complementary color in rgba format
-            return `rgba(${compR}, ${compG}, ${compB}, ${a})`;
-        }
-
         fetch('/random-image')
             .then(response => response.json())
             .then(data => {
-                document.getElementById('random-bg').textContent =
-                    `body {background: url("${data.imagePath}") no-repeat center center fixed; 
-                    -webkit-background-size: cover;
-                    -moz-background-size: cover;
-                    -o-background-size: cover;
-                    background-size: cover;}`;
+                const backgroundImageSmall = `url("${data.imagePathSmall}")`;
+                const backgroundImage = `url("${data.imagePath}")`;
 
+                const style = document.createElement('style');
+                style.textContent = `
+                    body {
+                        background: ${backgroundImageSmall} no-repeat center center fixed; 
+                        -webkit-background-size: cover;
+                        -moz-background-size: cover;
+                        -o-background-size: cover;
+                        background-size: cover;
+                    }
+                `;
+                document.head.appendChild(style);
 
-                fac.getColorAsync(data.imagePath)
+                const img = new Image();
+                img.src = data.imagePath;
+                img.addEventListener('load', () => {
+                    style.textContent = `
+                        body {
+                            background: ${backgroundImage} no-repeat center center fixed; 
+                            -webkit-background-size: cover;
+                            -moz-background-size: cover;
+                            -o-background-size: cover;
+                            background-size: cover;
+                        }
+                    `;
+                });
+
+                fac.getColorAsync(data.imagePathSmall)
                     .then(color => {
                         document.documentElement.style.setProperty('--dynamic-color', color.rgb);
                         document.documentElement.style.setProperty('--compl-color', `rgba(${color.value[0]}, ${color.value[1]}, ${color.value[2]}, ${color.value[3] - 220})`);
@@ -124,7 +121,7 @@
                 "We'll have our Christmas party online, eating cake in front of the screen♪",
                 "Looking back, this was an eventful year. It was as good as it gets.♪",
                 "Hey, want to try on a traditional kimono, seeing as it's New Year and all that?",
-                "Huh, Mafuyu’s the ogre? I wanted it to be Ena so I could throw beans at her.",
+                "Huh, Mafuyu's the ogre? I wanted it to be Ena so I could throw beans at her.",
                 "Teehee! Now just to decorate the chocolates before they set!",
                 "Doll Festival already has such a cute ring to it. Those rice puffs and special mochi are really cute and colorful too!",
                 "I wonder if I'll get anything in return? It looked like Kanade was getting something ready, so just maybe...!",

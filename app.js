@@ -17,7 +17,10 @@ app.get("/random-image", (req, res) => {
       res.status(500).send("Internal Server Error");
     } else {
       const randomImage = files[Math.floor(Math.random() * files.length)];
-      res.send({ imagePath: "/img/" + randomImage });
+      res.send({
+        imagePath: "/img/" + randomImage,
+        imagePathSmall: "/img-small/" + randomImage.replace(".", "_small."),
+      });
     }
   });
 });
