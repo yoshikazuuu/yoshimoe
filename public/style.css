@@ -19,13 +19,15 @@ body {
 .quote {
   font-family: Georgia;
   font-style: italic;
-  font-size: 4em;
+  font-size: 2.5em;
   text-shadow: none;
   color: rgba(0, 0, 0, 0.5);
   position: fixed;
   z-index: -1;
   right: 5%;
-  top: 10%;
+  top: 50%;
+  bottom: 50%;
+  transform: translateY(-50%);
   width: 40%;
   text-align: right;
   align-items: center;
@@ -69,7 +71,7 @@ footer {
   padding-left: 10%;
   display: flex;
   width: 644px;
-  height: 486px;
+  height: auto;
   flex-direction: column;
   flex-shrink: 0;
   color: white;
@@ -103,6 +105,10 @@ footer {
   body {
     width: auto;
     padding: 5%;
+  }
+
+  .quote {
+    display: none;
   }
 
   .title {
