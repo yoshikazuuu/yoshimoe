@@ -5,7 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "nodemon app.js"
+    "deploy": "nodemon app.js",
+    "start": "nodemon"
+  },
+  "nodemonConfig": {
+    "watch": ["public"],
+    "ext": "js,css,html",
+    "ignore": ["node_modules"],
+    "exec": "node ./app.js"
   },
   "keywords": [],
   "author": "",
